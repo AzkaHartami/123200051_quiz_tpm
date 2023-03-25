@@ -17,6 +17,8 @@ class _PokemonDetailState extends State<PokemonDetail> {
   @override
   bool toggle = false;
 
+
+
   Widget build(BuildContext context) {
     final PokemonData pokedex = listPokemon[widget.pokedexID];
     return Scaffold(
@@ -28,14 +30,20 @@ class _PokemonDetailState extends State<PokemonDetail> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: IconButton(
-                icon:
-                    toggle ? Icon(Icons.favorite_border) : Icon(Icons.favorite),
-                onPressed: () {
-                  setState(() {
-                    toggle = !toggle;
-                  });
-                },
-              ),
+  icon: toggle ? Icon(Icons.favorite_border) : Icon(Icons.favorite),
+  onPressed: () {
+    setState(() {
+      toggle = !toggle;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(toggle ? "Tambahkan ke Favorit" : "Hapus Dari Favorit"),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  },
+),
+
             ),
           ],
         ),
